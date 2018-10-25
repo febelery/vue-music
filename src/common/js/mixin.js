@@ -29,7 +29,7 @@ export const playlistMixin = {
 export const playerMixin = {
   computed: {
     iconMode() {
-      return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random'
+      return this.mode === playMode.sequence ? 'align-justify' : this.mode === playMode.loop ? 'redo' : 'random'
     },
     ...mapGetters([
       'sequenceList',

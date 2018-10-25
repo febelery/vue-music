@@ -81,18 +81,6 @@
       showConfirm() {
         this.$refs.confirm.show()
       },
-      onQueryChange(query) {
-        this.query = query
-      },
-      addQuery(query) {
-        this.$refs.searchBox.setQuery(query)
-      },
-      blurInput() {
-        this.$refs.searchBox.blur()
-      },
-      saveSearch() {
-        this.saveSearchHistory(this.query)
-      },
       _getHotKey() {
         getHotKey().then((res) => {
           if (res.code === ERR_OK) {
@@ -101,8 +89,6 @@
         })
       },
       ...mapActions([
-        'saveSearchHistory',
-        'deleteSearchHistory',
         'clearSearchHistory'
       ])
     }
