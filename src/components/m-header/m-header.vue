@@ -1,7 +1,9 @@
 <template>
   <div class="m-header">
-    <div class="icon"></div>
-    <h1 class="text">Vue Music</h1>
+    <div class="icon">
+      <font-awesome-icon class="icon-logo" icon="music"></font-awesome-icon>
+    </div>
+    <h1 class="text">Ross Music</h1>
     <router-link tag="div" class="mine" to="/user">
       <font-awesome-icon class="icon-mine" :icon="['far','user']"></font-awesome-icon>
     </router-link>
@@ -31,8 +33,11 @@
       width: 30px
       height: 32px
       margin-right: 9px
-      bg-image('logo')
       background-size: 30px 32px
+      .icon-logo
+        height:32px
+        width:22px
+        line-height 32px
     .text
       display: inline-block
       vertical-align: top
