@@ -2,9 +2,9 @@
   <div class="m-header">
     <div class="icon"></div>
     <h1 class="text">Vue Music</h1>
-    <!--<router-link tag="div" class="mine" to="/user">-->
-    <!--<i class="icon-min"></i>-->
-    <!--</router-link>-->
+    <router-link tag="div" class="mine" to="/user">
+      <font-awesome-icon class="icon-mine" :icon="['far','user']"></font-awesome-icon>
+    </router-link>
   </div>
 </template>
 

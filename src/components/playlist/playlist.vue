@@ -18,8 +18,8 @@
                                  v-if="showPlayIcon(item)"></font-awesome-icon>
               <i class="current" v-else></i>
               <span class="text">{{item.name}}</span>
-              <span class="like">
-                <font-awesome-icon :icon="['far','heart']" class="icon-not-favorite"/>
+              <span class="like" @click.stop="toggleFavorite(item)">
+                <font-awesome-icon :icon="['far','heart']" :class="getFavoriteIcon(item)"/>
               </span>
               <span @click.stop="deleteOne(item)" class="delete">
                 <font-awesome-icon class="icon-delete" icon="times"></font-awesome-icon>

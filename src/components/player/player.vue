@@ -36,6 +36,7 @@
                 <p ref="lyricLine"
                    class="text"
                    :class="{'current': currentLineNum ===index}"
+                   :key="index"
                    v-for="(line,index) in currentLyric.lines">{{line.txt}}</p>
               </div>
             </div>
@@ -67,7 +68,7 @@
               <font-awesome-icon icon="forward" class="icon-next" @click="next"/>
             </div>
             <div class="icon i-right">
-              <font-awesome-icon :icon="['far','heart']" class="icon-not-favorite"/>
+              <font-awesome-icon @click="toggleFavorite(currentSong)" :icon="['far','heart']" :class="getFavoriteIcon(currentSong)"/>
             </div>
           </div>
         </div>
@@ -91,7 +92,7 @@
       </div>
     </transition>
     <playlist ref="playlist"></playlist>
-    <audio ref="audio" :src="currentSong.url" @canplay="ready" @error="error" @ended="end"
+    <audio ref="audio" :src="currentSong.url" @play="ready" @error="error" @ended="end"
            @timeupdate="updateTime"></audio>
   </div>
 </template>
@@ -235,7 +236,7 @@
           if (this.playing) {
             this.currentLyric.play()
           }
-        }).catch((e) => {
+        }).catch(() => {
           this.currentLyric   = null
           this.playingLyric   = ''
           this.currentLineNum = 0
@@ -438,6 +439,8 @@
           this.currentLineNum = 0
         }
         clearTimeout(this.timer)
+        //手机端切换到后台，然后切换回来，保证JS能正常执行
+        //防止切换歌曲过快
         this.timer = setTimeout(() => {
           this.$refs.audio.play()
           this.getLyric()
@@ -689,10 +692,13 @@
           font-size: 30px
           color: $color-theme-d
         .icon-mini
-          font-size: 18px
+          font-size: 10px
           position: absolute
-          left: 10px
-          top: 6px
+          left: 0
+          top: 0
+          right 0
+          bottom 0
+          margin auto
 
   @keyframes rotate
     0%

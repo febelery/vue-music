@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-circle">
+  <div class="progress-circle" ref="progressCircle">
     <svg :width="radius" :height="radius" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <circle class="progress-background" r="50" cx="50" cy="50" fill="transparent"></circle>
       <circle class="progress-bar" r="50" cx="50" cy="50" fill="transparent"
@@ -23,6 +23,10 @@
         type: Number,
         default: 0
       }
+    },
+    mounted(){
+        this.$refs.progressCircle.style.height = this.radius + 'px'
+        this.$refs.progressCircle.style.width = this.radius + 'px'
     },
     data() {
       return {
