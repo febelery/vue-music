@@ -125,8 +125,8 @@
           blur = Math.min(20, percent * 20)
         }
 
-        this.$refs.layer.style['transform'] = `translate3d(0,${translateY}px,0)`
-        this.$refs.filter.style['backdrop'] = `blur(${blur}px)`
+        this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
+        this.$refs.filter.style[backdrop] = `blur(${blur}px)`
         if (newVal < this.minTransalteY) {
           zIndex = 10
           this.$refs.bgImage.style.paddingTop = 0
