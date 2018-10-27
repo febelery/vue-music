@@ -4,10 +4,7 @@
       <slot></slot>
     </div>
     <div class="dots">
-      <span class="dot"
-            :class="{active: currentPageIndex === index }"
-            v-for="(item, index) in dots">
-      </span>
+      <span class="dot" :class="{active: currentPageIndex === index }" v-for="(item, index) in dots" :key="index"></span>
     </div>
   </div>
 </template>
@@ -29,7 +26,11 @@
       },
       interval: {
         type: Number,
-        default: 4000
+        default: 2000
+      },
+      animateSpeed: {
+        type: Number,
+        default: 400
       }
     },
     data() {
@@ -45,7 +46,7 @@
         this._initSlider()
 
         if (this.autoPlay) {
-          this._play()
+          this._play(1)
         }
       }, 20)
 
@@ -94,19 +95,20 @@
           snap: true,
           snapLoop: this.loop,
           snapThreshold: 0.3,
-          snapSpeed: 400
+          snapSpeed: this.animateSpeed
         })
 
         this.slider.on('scrollEnd', () => {
           let pageIndex = this.slider.getCurrentPage().pageX
-          if (this.loop) {
-            pageIndex -= 1
+          let nextPageIndex
+          if (this.loop && pageIndex >= this.children.length - 1) {
+            nextPageIndex = 0
+          } else {
+            nextPageIndex = pageIndex + 1
           }
-          //todo bug
-          this.currentPageIndex = (this.currentPageIndex + 2 == this.children.length) ? 0 : pageIndex
 
           if (this.autoPlay) {
-            this._play()
+            this._play(nextPageIndex)
           }
         })
 
@@ -119,14 +121,11 @@
       _initDots() {
         this.dots = new Array(this.children.length)
       },
-      _play() {
-        let pageIndex = this.currentPageIndex + 1
-        if (this.loop) {
-          pageIndex += 1
-        }
+      _play(nextPageIndex) {
+        this.currentPageIndex = nextPageIndex === 0 ? 4 :  nextPageIndex - 1
 
         this.timer = setTimeout(() => {
-          this.slider.goToPage(pageIndex, 0, 400)
+          this.slider.goToPage(nextPageIndex, 0, this.animateSpeed)
         }, this.interval)
       }
     }
