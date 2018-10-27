@@ -6,6 +6,8 @@ export const commonParams = {
   format: 'jsonp'
 }
 
+export const songUrlGuid = 6886437314
+
 export const options = {
   param: 'jsonpCallback'
 }

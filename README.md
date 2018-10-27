@@ -22,26 +22,5 @@
 
 
 
-https://c.y.qq.com/base/fcgi-bin/fcg_music_express_mobile3.fcg?g_tk=1418093288&jsonpCallback=MusicJsonCallback01822902435765017&loginUin=344604012&hostUin=0&format=json&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0&cid=205361747&callback=MusicJsonCallback&uin=344604012&songmid=003OUlho2HcRHC&filename=C400003OUlho2HcRHC.m4a&guid=9010457983
-
-"g_tk":"1418093288",
-"jsonpCallback":"MusicJsonCallback01822902435765017",
-"callback":"MusicJsonCallback",
-"loginUin":"344604012",
-"hostUin":"0",
-"format":"json",
-"inCharset":"utf8",
-"outCharset":"utf-8",
-"notice":"0",
-"platform":"yqq",
-"needNewCode":"0",
-"cid":"205361747",
-"uin":"344604012",
-"songmid":"003OUlho2HcRHC",
-"filename":"C400003OUlho2HcRHC.m4a",
-"guid":"9010457983",
-
-
-https://www.yuque.com/ant-design/course/sc1lvc
 
 

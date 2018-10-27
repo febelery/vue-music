@@ -94,7 +94,7 @@
       </div>
     </transition>
     <playlist ref="playlist"></playlist>
-    <audio ref="audio" :src="currentSong.url" @play="ready" @error="error" @ended="end"
+    <audio ref="audio" :src="songUrl" @play="ready" @error="error" @ended="end"
            @timeupdate="updateTime"></audio>
   </div>
 </template>
@@ -126,7 +126,8 @@
         currentLyric: null,
         currentLineNum: 0,
         currentShow: 'cd',
-        playingLyric: ''
+        playingLyric: '',
+        songUrl:'',
       }
     },
     //不用setter和getter时用created
@@ -434,24 +435,31 @@
         if (currentSong.id === oldSong.id) {
           return
         }
-        if (this.currentLyric) {
-          this.currentLyric.stop()
-          this.currentTime = 0
-          this.playingLyric = ''
-          this.currentLineNum = 0
-        }
-        clearTimeout(this.timer)
-        //手机端切换到后台，然后切换回来，保证JS能正常执行
-        //防止切换歌曲过快
-        this.timer = setTimeout(() => {
-          this.$refs.audio.play()
-          this.getLyric()
-        }, 1000)
+        currentSong.getSongUrl().then(res => {
+          this.songUrl = res
+          if (this.currentLyric) {
+            this.currentLyric.stop()
+            this.currentTime = 0
+            this.playingLyric = ''
+            this.currentLineNum = 0
+          }
+          clearTimeout(this.timer)
+          //手机端切换到后台，然后切换回来，保证JS能正常执行
+          //防止切换歌曲过快
+          this.timer = setTimeout(() => {
+            this.$refs.audio.play()
+            this.getLyric()
+          }, 1000)
+        })
+
       },
       playing(newPlaying) {
         const audio = this.$refs.audio
-        this.$nextTick(() => {
-          newPlaying ? audio.play() : audio.pause()
+        this.currentSong.getSongUrl().then((res) => {
+          this.songUrl = res
+          this.$nextTick(() => {
+            newPlaying ? audio.play() : audio.pause()
+          })
         })
       },
     },

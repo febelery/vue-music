@@ -1,9 +1,9 @@
-import {getLyric} from "../../api/song";
-import {ERR_OK} from "../../api/config";
+import {getLyric, getMusicExpress} from "../../api/song";
+import {ERR_OK, songUrlGuid} from "../../api/config";
 import {Base64} from 'js-base64'
 
 export default class Song {
-  constructor({id, mid, singer, name, album, duration, image, url}) {
+  constructor({id, mid, singer, name, album, duration, image}) {
     this.id = id
     this.mid = mid
     this.singer = singer
@@ -11,7 +11,6 @@ export default class Song {
     this.album = album
     this.duration = duration
     this.image = image
-    this.url = url
   }
 
   getLyric() {
@@ -29,6 +28,24 @@ export default class Song {
       })
     })
   }
+
+  getSongUrl() {
+    if (this.url) {
+      return Promise.resolve(this.url)
+    }
+    return new Promise((resolve, reject) => {
+      getMusicExpress(this.mid).then(res => {
+        if (res.code === ERR_OK) {
+          const vkey = res.data.items[0].vkey
+          this.url = "http://dl.stream.qqmusic.qq.com/http://dl.stream.qqmusic.qq.com/C400" + this.mid + ".m4a?guid=" + songUrlGuid + "&vkey=" + vkey + "&uin=100&fromtag=36"
+          resolve(this.url)
+        } else {
+          reject('error in get song url')
+        }
+      })
+    })
+
+  }
 }
 
 export function createSong(musicData) {
@@ -40,9 +57,6 @@ export function createSong(musicData) {
     album: musicData.albumname,
     duration: musicData.interval,
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    //todo 链接不能获取正确
-    // url: 'http://dl.stream.qqmusic.qq.com/http://dl.stream.qqmusic.qq.com/C400' + musicData.songmid + '.m4a?guid=6159747516&vkey=' + musicData.vkey + '&uin=0&fromtag=38'
-    url: 'http://dl.stream.qqmusic.qq.com/http://dl.stream.qqmusic.qq.com/C400001OyHbk2MSIi4.m4a?guid=1148308198&vkey=6E9F5FC6C77AF4CBEAC4CA7A4E6802C7472C5FE8DD515E1E1A96CA57A15FEF5665F41C75A5E4C5AA191F34BA7D3D811F29A4A71274F1712F&uin=0&fromtag=38' + Math.random(),
   })
 
   return song
