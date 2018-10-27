@@ -162,9 +162,9 @@
         // 当滚动到底部，且-newY大于最后一个元素的上限
         this.currentIndex = listHeight.length - 2
       },
-      diff(newVal){
+      diff(newVal) {
         let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : 0
-        if(this.fixedTop === fixedTop){
+        if (this.fixedTop === fixedTop) {
           return
         }
         this.fixedTop = fixedTop

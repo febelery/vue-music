@@ -74,17 +74,17 @@
           &.icon0
             bg-image('first')
             font-size 34px
-            font-style:oblique
+            font-style: oblique
             color $color-theme
           &.icon1
             bg-image('second')
             font-size 30px
-            font-style:oblique
+            font-style: oblique
             color $color-theme
           &.icon2
             bg-image('third')
             font-size 26px
-            font-style:oblique
+            font-style: oblique
             color $color-theme
         .text
           color: $color-theme

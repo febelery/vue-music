@@ -35,8 +35,8 @@
       margin-right: 9px
       background-size: 30px 32px
       .icon-logo
-        height:32px
-        width:22px
+        height: 32px
+        width: 22px
         line-height 32px
     .text
       display: inline-block

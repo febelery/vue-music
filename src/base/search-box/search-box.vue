@@ -10,10 +10,10 @@
   import {debounce} from "../../common/js/util";
 
   export default {
-    name   : "search-box",
-    props  : {
+    name: "search-box",
+    props: {
       placeholder: {
-        type   : String,
+        type: String,
         default: '搜索歌曲、歌手'
       }
     },

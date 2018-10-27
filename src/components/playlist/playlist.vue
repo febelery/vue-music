@@ -52,11 +52,11 @@
   import {playerMixin} from "../../common/js/mixin";
 
   export default {
-    name      : "playlist",
-    mixins    : [playerMixin],
+    name: "playlist",
+    mixins: [playerMixin],
     data() {
       return {
-        showFlag    : false,
+        showFlag: false,
         refreshDelay: 120
       }
     },
@@ -65,12 +65,12 @@
       Confirm,
       AddSong
     },
-    computed  : {
+    computed: {
       modeText() {
         return this.mode === playMode.sequence ? '顺序播放' : this.mode === playMode.random ? '随机播放' : '单曲循环'
       }
     },
-    methods   : {
+    methods: {
       show() {
         this.showFlag = true
         setTimeout(() => {
@@ -87,7 +87,7 @@
         }
         return false
       },
-      addSong(){
+      addSong() {
         this.$refs.addSong.show()
       },
       confirmClear() {
@@ -123,7 +123,7 @@
         'deleteSongList'
       ])
     },
-    watch:{
+    watch: {
       currentSong(newSong, oldSong) {
         if (!this.showFlag || newSong.id === oldSong.id) {
           return

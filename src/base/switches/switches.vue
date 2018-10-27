@@ -9,14 +9,14 @@
 
 <script>
   export default {
-    name   : "switches",
-    props  : {
-      switches    : {
-        type   : Array,
+    name: "switches",
+    props: {
+      switches: {
+        type: Array,
         default: []
       },
       currentIndex: {
-        type   : Number,
+        type: Number,
         default: 0
       }
     },

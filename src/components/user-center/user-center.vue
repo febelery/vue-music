@@ -37,8 +37,8 @@
   import {playlistMixin} from "../../common/js/mixin";
 
   export default {
-    name      : "user-center",
-    mixins    : [playlistMixin],
+    name: "user-center",
+    mixins: [playlistMixin],
     components: {
       Switches,
       Scroll,
@@ -68,7 +68,7 @@
     data() {
       return {
         currentIndex: 0,
-        switches    : [
+        switches: [
           {
             name: '我喜欢的'
           },
@@ -78,7 +78,7 @@
         ]
       }
     },
-    methods   : {
+    methods: {
       handlePlaylist(playlist) {
         const bottom = playlist.length > 0 ? '60px' : ''
         this.$refs.listWrapper.style.bottom = bottom

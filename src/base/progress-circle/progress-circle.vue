@@ -24,9 +24,9 @@
         default: 0
       }
     },
-    mounted(){
-        this.$refs.progressCircle.style.height = this.radius + 'px'
-        this.$refs.progressCircle.style.width = this.radius + 'px'
+    mounted() {
+      this.$refs.progressCircle.style.height = this.radius + 'px'
+      this.$refs.progressCircle.style.width = this.radius + 'px'
     },
     data() {
       return {

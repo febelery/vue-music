@@ -19,7 +19,7 @@
         songs: []
       }
     },
-    components:{
+    components: {
       MusicList
     },
     computed: {
@@ -36,8 +36,8 @@
     created() {
       this._getDetail()
     },
-    methods:{
-      _getDetail(){
+    methods: {
+      _getDetail() {
         if (!this.singer.id) {
           this.$router.push('/singer')
           return

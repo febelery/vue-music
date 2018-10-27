@@ -45,15 +45,15 @@
   import {mapActions} from 'vuex'
 
   export default {
-    name      : "search",
-    mixins    : [playlistMixin, searchMixin],
+    name: "search",
+    mixins: [playlistMixin, searchMixin],
     created() {
       this._getHotKey()
     },
     data() {
       return {
         hotKey: [],
-        query : ''
+        query: ''
       }
     },
     computed: {
@@ -68,7 +68,7 @@
       SearchList,
       Confirm
     },
-    methods   : {
+    methods: {
       handlePlaylist(playlist) {
         const bottom = playlist.length > 0 ? '60px' : ''
 

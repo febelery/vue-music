@@ -68,7 +68,8 @@
               <font-awesome-icon icon="forward" class="icon-next" @click="next"/>
             </div>
             <div class="icon i-right">
-              <font-awesome-icon @click="toggleFavorite(currentSong)" :icon="['far','heart']" :class="getFavoriteIcon(currentSong)"/>
+              <font-awesome-icon @click="toggleFavorite(currentSong)" :icon="['far','heart']"
+                                 :class="getFavoriteIcon(currentSong)"/>
             </div>
           </div>
         </div>
@@ -83,7 +84,8 @@
         </div>
         <div class="control">
           <progress-circle :radius="radius" :percent="percent">
-            <font-awesome-icon @click.stop="togglePlaying" :icon="playIcon" class="icon-mini icon-pause-mini"/>
+            <font-awesome-icon @click.stop="togglePlaying" :icon="playIcon"
+                               class="icon-mini icon-pause-mini"/>
           </progress-circle>
         </div>
         <div class="control">
@@ -98,7 +100,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations,mapActions} from 'vuex'
+  import {mapGetters, mapMutations, mapActions} from 'vuex'
   import animations from 'create-keyframe-animation'
   import {prefixStyle} from '../../common/js/dom'
   import ProgressBar from '../../base/progress-bar/progress-bar'
@@ -110,28 +112,28 @@
   import {playerMixin} from '../../common/js/mixin'
   import Lyric from 'lyric-parser'
 
-  const transform          = prefixStyle('transform')
+  const transform = prefixStyle('transform')
   const transitionDuration = prefixStyle('transitionDuration')
 
   export default {
-    name      : "player",
-    mixins    : [playerMixin],
+    name: "player",
+    mixins: [playerMixin],
     data() {
       return {
-        songReady     : false,
-        currentTime   : 0,
-        radius        : 32,
-        currentLyric  : null,
+        songReady: false,
+        currentTime: 0,
+        radius: 32,
+        currentLyric: null,
         currentLineNum: 0,
-        currentShow   : 'cd',
-        playingLyric  : ''
+        currentShow: 'cd',
+        playingLyric: ''
       }
     },
     //不用setter和getter时用created
     created() {
       this.touch = {}
     },
-    computed  : {
+    computed: {
       ...mapGetters([
         'currentIndex',
         'fullScreen',
@@ -150,7 +152,7 @@
         return this.currentTime / this.currentSong.duration
       },
     },
-    methods   : {
+    methods: {
       back() {
         this.setFullScreen(false)
       },
@@ -218,7 +220,7 @@
         }
       },
       onProgressBarChange(percent) {
-        const currentTime            = this.currentSong.duration * percent
+        const currentTime = this.currentSong.duration * percent
         this.$refs.audio.currentTime = currentTime
         if (!this.playing) {
           this.togglePlaying()
@@ -237,8 +239,8 @@
             this.currentLyric.play()
           }
         }).catch(() => {
-          this.currentLyric   = null
-          this.playingLyric   = ''
+          this.currentLyric = null
+          this.playingLyric = ''
           this.currentLineNum = 0
         })
       },
@@ -274,7 +276,7 @@
         this.currentTime = e.target.currentTime
       },
       format(interval) {
-        interval     = interval | 0
+        interval = interval | 0
         const minute = interval / 60 | 0
         const second = this._pad(interval % 60)
         return `${minute}:${second}`
@@ -289,16 +291,16 @@
       },
       middleTouchStart(e) {
         this.touch.initialized = true
-        this.touch.moved       = false
-        const touch            = e.touches[0]
-        this.touch.pageX       = touch.pageX
-        this.touch.pageY       = touch.pageY
+        this.touch.moved = false
+        const touch = e.touches[0]
+        this.touch.pageX = touch.pageX
+        this.touch.pageY = touch.pageY
       },
       middleTouchMove(e) {
         if (!this.touch.initialized) {
           return
         }
-        const touch  = e.touches[0]
+        const touch = e.touches[0]
         const deltaX = touch.pageX - this.touch.pageX
         const deltaY = touch.pageY - this.touch.pageY
         if (Math.abs(deltaY) > Math.abs(deltaX)) {
@@ -307,13 +309,13 @@
         if (!this.touch.moved) {
           this.touch.moved = true
         }
-        const left                                         = this.currentShow === 'cd' ? 0 : -window.innerWidth
-        const offsetWidth                                  = Math.min(0, Math.max(-window.innerWidth, left + deltaX))
-        this.touch.percent                                 = Math.abs(offsetWidth / window.innerWidth)
-        this.$refs.lyricList.$el.style[transform]          = `translate3d(${offsetWidth}px,0,0)` //vue的组件,必须要用$el获取
+        const left = this.currentShow === 'cd' ? 0 : -window.innerWidth
+        const offsetWidth = Math.min(0, Math.max(-window.innerWidth, left + deltaX))
+        this.touch.percent = Math.abs(offsetWidth / window.innerWidth)
+        this.$refs.lyricList.$el.style[transform] = `translate3d(${offsetWidth}px,0,0)` //vue的组件,必须要用$el获取
         this.$refs.lyricList.$el.style[transitionDuration] = 0
-        this.$refs.middleL.style.opacity                   = 1 - this.touch.percent
-        this.$refs.middleL.style[transitionDuration]       = 0
+        this.$refs.middleL.style.opacity = 1 - this.touch.percent
+        this.$refs.middleL.style[transitionDuration] = 0
       },
       middleTouchEnd() {
         if (!this.touch.moved) {
@@ -322,38 +324,38 @@
         let offsetWidth, opacity
         if (this.currentShow === 'cd') {
           if (this.touch.percent > 0.1) {
-            offsetWidth      = -window.innerWidth
-            opacity          = 0
+            offsetWidth = -window.innerWidth
+            opacity = 0
             this.currentShow = 'lyric'
           } else {
             offsetWidth = 0
-            opacity     = 1
+            opacity = 1
           }
         } else {
           if (this.touch.percent < 0.9) {
-            offsetWidth      = 0
+            offsetWidth = 0
             this.currentShow = 'cd'
-            opacity          = 1
+            opacity = 1
           } else {
             offsetWidth = -window.innerWidth
-            opacity     = 0
+            opacity = 0
           }
         }
-        const time                                         = 300
-        this.$refs.lyricList.$el.style[transform]          = `translate3d(${offsetWidth}px,0,0)`
+        const time = 300
+        this.$refs.lyricList.$el.style[transform] = `translate3d(${offsetWidth}px,0,0)`
         this.$refs.lyricList.$el.style[transitionDuration] = `${time}ms`
-        this.$refs.middleL.style.opacity                   = opacity
-        this.$refs.middleL.style[transitionDuration]       = `${time}ms`
-        this.touch.initiated                               = false
+        this.$refs.middleL.style.opacity = opacity
+        this.$refs.middleL.style[transitionDuration] = `${time}ms`
+        this.touch.initiated = false
       },
       enter(el, done) {
         const {x, y, scale} = this._getPosAndScale()
 
         let animation = {
-          0  : {
+          0: {
             transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
           },
-          60 : {
+          60: {
             transform: `translate3d(0,0,0) scale(1.1)`
           },
           100: {
@@ -362,11 +364,11 @@
         }
 
         animations.registerAnimation({
-          name   : 'move',
+          name: 'move',
           animation,
           presets: {
             duration: 400,
-            easing  : 'linear'
+            easing: 'linear'
           }
         })
 
@@ -378,7 +380,7 @@
       },
       leave(el, done) {
         this.$refs.cdWrapper.style.transition = 'all 0.4s'
-        const {x, y, scale}                   = this._getPosAndScale()
+        const {x, y, scale} = this._getPosAndScale()
         this.$refs.cdWrapper.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
         this.$refs.cdWrapper.addEventListener('transitionend', done)
       },
@@ -399,14 +401,14 @@
         this.$refs.playlist.show()
       },
       _getPosAndScale() {
-        const targetWidth   = 40
-        const paddingLeft   = 40
+        const targetWidth = 40
+        const paddingLeft = 40
         const paddingBottom = 30
-        const paddingTop    = 80
-        const width         = window.innerWidth * 0.8
-        const scale         = targetWidth / width
-        const x             = -(window.innerWidth / 2 - paddingLeft)
-        const y             = window.innerHeight - paddingTop - width / 2 - paddingBottom
+        const paddingTop = 80
+        const width = window.innerWidth * 0.8
+        const scale = targetWidth / width
+        const x = -(window.innerWidth / 2 - paddingLeft)
+        const y = window.innerHeight - paddingTop - width / 2 - paddingBottom
         return {
           x,
           y,
@@ -414,17 +416,17 @@
         }
       },
       ...mapMutations({
-        setFullScreen  : 'SET_FULL_SCREEN',
+        setFullScreen: 'SET_FULL_SCREEN',
         setPlayingState: 'SET_PLAYING_STATE',
         setCurrentIndex: 'SET_CURRENT_INDEX',
-        setPlayMode    : 'SET_PLAY_MODE',
-        setPlaylist    : 'SET_PLAYLIST',
+        setPlayMode: 'SET_PLAY_MODE',
+        setPlaylist: 'SET_PLAYLIST',
       }),
       ...mapActions([
         'savePlayHistory'
       ])
     },
-    watch     : {
+    watch: {
       currentSong(currentSong, oldSong) {
         if (!currentSong.id) {
           return
@@ -434,8 +436,8 @@
         }
         if (this.currentLyric) {
           this.currentLyric.stop()
-          this.currentTime    = 0
-          this.playingLyric   = ''
+          this.currentTime = 0
+          this.playingLyric = ''
           this.currentLineNum = 0
         }
         clearTimeout(this.timer)

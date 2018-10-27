@@ -53,8 +53,8 @@
   import Song from "../../common/js/song";
 
   export default {
-    name      : "add-song",
-    mixins    : [searchMixin],
+    name: "add-song",
+    mixins: [searchMixin],
     components: {
       SearchBox,
       Suggest,
@@ -64,24 +64,24 @@
       topTip,
       SearchList,
     },
-    computed  : {
+    computed: {
       ...mapGetters([
         'playHistory'
       ])
     },
     data() {
       return {
-        showFlag    : false,
-        showSinger  : false,
+        showFlag: false,
+        showSinger: false,
         currentIndex: 0,
-        songs       : [],
-        switches    : [
+        songs: [],
+        switches: [
           {name: '最近播放'},
           {name: '搜索历史'},
         ]
       }
     },
-    methods   : {
+    methods: {
       show() {
         this.showFlag = true
         setTimeout(() => {

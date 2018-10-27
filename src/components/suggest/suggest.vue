@@ -35,26 +35,26 @@
   import Singer from '../../common/js/singer'
 
   const TYPE_SINGER = 'singer'
-  const perpage     = 20
+  const perpage = 20
 
   export default {
-    name      : "suggest",
-    props     : {
-      query     : {
-        type   : String,
+    name: "suggest",
+    props: {
+      query: {
+        type: String,
         default: ''
       },
       showSinger: {
-        type   : Boolean,
+        type: Boolean,
         default: true
       }
     },
     data() {
       return {
-        page        : 1,
-        pullup      : true,
-        hasMore     : true,
-        result      : [],
+        page: 1,
+        pullup: true,
+        hasMore: true,
+        result: [],
         beforeScroll: true,
       }
     },
@@ -63,12 +63,12 @@
       Loading,
       NoResult
     },
-    methods   : {
+    methods: {
       refresh() {
         this.$refs.suggest.refresh()
       },
       search() {
-        this.page    = 1
+        this.page = 1
         this.hasMore = true
         this.$refs.suggest.scrollTo(0, 0)
         search(this.query, this.page, this.showSinger, perpage).then(res => {
@@ -161,7 +161,7 @@
         'insertSong'
       ])
     },
-    watch     : {
+    watch: {
       query(newQuery) {
         this.search(newQuery)
       }

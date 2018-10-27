@@ -8,10 +8,10 @@
 
 <script>
   export default {
-    name   : "top-tip",
-    props  : {
+    name: "top-tip",
+    props: {
       delay: {
-        type   : Number,
+        type: Number,
         default: 2000
       }
     },

@@ -103,7 +103,7 @@
             pageIndex -= 1
           }
           //todo bug
-          this.currentPageIndex =(this.currentPageIndex+2 == this.children.length) ? 0 : pageIndex
+          this.currentPageIndex = (this.currentPageIndex + 2 == this.children.length) ? 0 : pageIndex
 
           if (this.autoPlay) {
             this._play()
