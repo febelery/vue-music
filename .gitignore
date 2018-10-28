@@ -3,6 +3,7 @@
 /dist
 /source
 package-lock.json
+.env
 
 # local env files
 .env.local

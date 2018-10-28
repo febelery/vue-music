@@ -1,5 +1,5 @@
 import jsonp from '../common/js/jsonp'
-import {commonParams, options} from "./config";
+import {commonParams, options, searchUrl} from "./config";
 import axios from "axios";
 
 export function getHotKey() {
@@ -15,8 +15,6 @@ export function getHotKey() {
 }
 
 export function search(query, page, zhida, perpage) {
-  const url = '/api/search'
-
   const data = Object.assign({}, commonParams, {
     w: query,
     p: page,
@@ -35,7 +33,7 @@ export function search(query, page, zhida, perpage) {
     platform: 'h5'
   })
 
-  return axios.get(url, {
+  return axios.get(searchUrl, {
     params: data
   }).then((res) => {
     return Promise.resolve(res.data)

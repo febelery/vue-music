@@ -1,6 +1,6 @@
-const path    = require('path')
+const path = require('path')
 const express = require('express')
-var axios     = require('axios')
+var axios = require('axios')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -12,9 +12,9 @@ apiRoutes.get('/getDiscList', function (req, res) {
   axios.get(url, {
     headers: {
       referer: 'https://c.y.qq.com/',
-      host   : 'c.y.qq.com'
+      host: 'c.y.qq.com'
     },
-    params : req.query
+    params: req.query
   }).then((response) => {
     res.json(response.data)
   }).catch((e) => {
@@ -26,13 +26,13 @@ apiRoutes.get('/lyric', function (req, res) {
   axios.get(url, {
     headers: {
       referer: 'https://c.y.qq.com/',
-      host   : 'c.y.qq.com'
+      host: 'c.y.qq.com'
     },
-    params : req.query
+    params: req.query
   }).then((response) => {
     var ret = response.data
     if (typeof ret === 'string') {
-      var reg     = /^\w+\(({[^()]+})\)$/
+      var reg = /^\w+\(({[^()]+})\)$/
       var matches = ret.match(reg)
       if (matches) {
         ret = JSON.parse(matches[1])
@@ -49,9 +49,9 @@ apiRoutes.get('/getSongList', function (req, res) {
   axios.get(url, {
     headers: {
       referer: 'https://c.y.qq.com/',
-      host   : 'c.y.qq.com'
+      host: 'c.y.qq.com'
     },
-    params : req.query
+    params: req.query
   }).then((response) => {
     var ret = response.data
     if (typeof ret === 'string') {
@@ -70,9 +70,9 @@ apiRoutes.get('/search', function (req, res) {
   axios.get(url, {
     headers: {
       referer: 'https://c.y.qq.com/',
-      host   : 'c.y.qq.com'
+      host: 'c.y.qq.com'
     },
-    params : req.query
+    params: req.query
   }).then((response) => {
     var ret = response.data
     var matches = ret.slice(9, -1)
@@ -88,20 +88,20 @@ apiRoutes.get('/search', function (req, res) {
 
 module.exports = {
   devServer: {
-    port  : 8080,
+    port: 8080,
     before: app => {
       app.use('/api', apiRoutes)
     }
   },
-  pages    : {
+  pages: {
     index: {
-      entry   : 'src/main.js',
+      entry: 'src/main.js',
       template: 'index.html',
       filename: 'index.html'
     },
   },
-
-  lintOnSave  : true,
+  assetsDir: 'music',
+  lintOnSave: process.env.NODE_ENV !== 'production',
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@$', resolve('src'))

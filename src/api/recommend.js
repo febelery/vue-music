@@ -1,5 +1,5 @@
 import jsonp from '../common/js/jsonp'
-import {commonParams, options} from "./config";
+import {commonParams, options, discListUrl, songListUrl} from "./config";
 import axios from 'axios'
 
 export function getRecommend() {
@@ -15,8 +15,6 @@ export function getRecommend() {
 }
 
 export function getDiscList() {
-  const url = '/api/getDiscList'
-
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
     hostUin: 0,
@@ -29,7 +27,7 @@ export function getDiscList() {
     format: 'json'
   })
 
-  return axios.get(url, {
+  return axios.get(discListUrl, {
     params: data
   }).then(res => {
     return Promise.resolve(res.data)
@@ -37,8 +35,6 @@ export function getDiscList() {
 }
 
 export function getSongList(disstid) {
-  const url = '/api/getSongList'
-
   const data = Object.assign({}, commonParams, {
     disstid,
     type: 1,
@@ -50,14 +46,9 @@ export function getSongList(disstid) {
     needNewCode: 0
   })
 
-  return axios.get(url, {
+  return axios.get(songListUrl, {
     params: data
   }).then(res => {
     return Promise.resolve(res.data)
   })
-
-  // const opts = Object.assign({}, options, {
-  //   name: 'songlist' + disstid
-  // })
-  // return jsonp(url, data, opts)
 }
