@@ -3,7 +3,7 @@
     <div class="icon">
       <font-awesome-icon class="icon-logo" icon="music"></font-awesome-icon>
     </div>
-    <h1 class="text">Ross Music</h1>
+    <h1 class="text">Pure Music</h1>
     <router-link tag="div" class="mine" to="/user">
       <font-awesome-icon class="icon-mine" :icon="['far','user']"></font-awesome-icon>
     </router-link>
